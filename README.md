@@ -13,11 +13,36 @@ This kit provides **real synthetic fixtures and reusable local tools**; it inten
 7. Example read-only call: `curl -H 'X-Allowed-Project: ALPHA' http://127.0.0.1:8001/projects/ALPHA/sprints/12/issues`.
 8. For W3, run `docker compose up -d db` and use pgvector. Your implementation should add the ingestion pipeline.
 
+## OpenAI service helpers
+
+Copy `.env.example` to `.env` and set `OPENAI_API_KEY`. The `.env` file is
+ignored by Git. `OPENAI_MODEL` defaults to `gpt-5.6-luna`; the command wrappers
+can override the model with `--model`.
+
+Use `scripts/openai_service_cli.py` to test each input style:
+
+```bash
+python scripts/openai_service_cli.py text "Summarize the project risks."
+python scripts/openai_service_cli.py file data/documents/PM-02_gamma_risk_register.txt
+python scripts/openai_service_cli.py messages '[{"role":"developer","content":"Answer briefly."},{"role":"user","content":"What is the release risk?"}]'
+```
+
+Override the model when needed:
+
+```bash
+python scripts/openai_service_cli.py text "Explain the risk." --model gpt-5.6-luna
+```
+
+The underlying helpers are in `app/openai_service.py` and support UTF-8 `.md`
+and `.txt` files.
+
 ### Resource map
 - `data/documents/`: 15 synthetic documents plus manifest (5 requirements, 5 technical, 5 PM)
 - `data/jira/issues.json`: 30 sample issue records for Projects ALPHA/BETA/GAMMA
 - `data/evaluation/`: 20 labeled issue cases, 20 retrieval queries, 30 RAG cases, 20 agent scenarios, 10 security cases
 - `app/mock_jira.py`: working read-only mock Jira API for W5 onward
+- `app/openai_service.py`: OpenAI Responses API service helpers
+- `scripts/openai_service_cli.py`: command-line wrappers for testing OpenAI service inputs
 - `scripts/evaluate_issue_classifier.py`: scoring harness; supply CSV with headers `issue_id,predicted_category,predicted_priority`
 - `evidence/weekly_pr_template.md`: required PR/evidence structure
 - `assignments/`: weekly handoff instructions; slide deck contains full requirements and PASS criteria
