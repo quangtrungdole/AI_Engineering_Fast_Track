@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from app import openai_service
+from app.services import openai_service
 
 
 def fake_client(output_text: str = "generated answer") -> Mock:

@@ -21,7 +21,7 @@ DEFAULT_RESULTS_PATH = W01_ROOT / "results/issue_predictions.csv"
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from app.openai_service import generate_from_text
+from app.services.openai_service import generate_from_text
 
 
 class IssueInput(BaseModel):
