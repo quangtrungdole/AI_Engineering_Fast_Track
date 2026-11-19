@@ -4,7 +4,11 @@ WARNING: X-Allowed-Project is a teaching mock, NOT production authentication.
 from pathlib import Path
 import json
 from fastapi import FastAPI, HTTPException, Header
+from app.retrieval_api import router as retrieval_router
+
 app=FastAPI(title="Training Mock Jira", version="0.1")
+app.include_router(retrieval_router)
+
 ISSUES=json.loads((Path(__file__).resolve().parents[1]/"data/jira/issues.json").read_text())
 PROJECTS={"ALPHA","BETA","GAMMA"}
 def require_access(project: str, x_allowed_project: str|None):
