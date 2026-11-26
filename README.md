@@ -45,6 +45,29 @@ python scripts/openai_service_cli.py text "Explain the risk." --model gpt-5.6-lu
 The underlying helpers are in `app/services/openai_service.py` and support UTF-8 `.md`
 and `.txt` files.
 
+## Meeting analysis API
+
+Set `OPENAI_API_KEY` in `.env` and start the application:
+
+```bash
+uvicorn app.main:app --reload --port 8000
+```
+
+Send meeting notes to `POST /analyze-meeting` as JSON:
+
+```bash
+curl -X POST http://127.0.0.1:8000/analyze-meeting \
+  -H 'content-type: application/json' \
+  -d '{"meeting_text":"Meeting Date: 2026-11-23\nJordan will review the deployment plan by November 25, 2026."}'
+```
+
+The response contains a summary, explicit decisions, and assigned actions. An
+action's `owner` or `due_date` is `null` when that value is missing or cannot be
+determined from the notes; resolved dates use `YYYY-MM-DD`. The API validates the
+request and returns an error response rather than malformed model output when
+analysis fails. Interactive API documentation is available at
+`http://127.0.0.1:8000/docs`.
+
 ### Resource map
 - `data/documents/`: 15 synthetic documents plus manifest (5 requirements, 5 technical, 5 PM)
 - `data/jira/issues.json`: 30 sample issue records for Projects ALPHA/BETA/GAMMA
