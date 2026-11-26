@@ -41,19 +41,16 @@ python assignments/w03/evaluate_retrieval.py 10
 
 ## 3. Run the search API
 
-Start the API in a separate terminal after the vector database is set up:
+Start the main API in a separate terminal after the vector database is set up:
 
 ```bash
-uvicorn app.mock_jira:app --reload --port 8001
+uvicorn app.main:app --reload --port 8000
 ```
-
-This single server exposes both the existing mock Jira routes and the Week 3
-`/search` route on port `8001`.
 
 Query it with an authorization header that matches the requested project:
 
 ```bash
-curl -X POST http://127.0.0.1:8001/search \
+curl -X POST http://127.0.0.1:8000/search \
   -H 'Content-Type: application/json' -H 'X-Allowed-Project: ALPHA' \
   -d '{"query":"What is the Alpha UAT date?", "project_id":"ALPHA"}'
 ```

@@ -17,7 +17,7 @@
   - Provides schema initialization, upsert, search, and document deletion operations.
 - [`assignments/w03/ingest_documents.py`](../assignments/w03/ingest_documents.py) initializes the database and ingests all 15 manifest documents without running evaluation.
 - [`assignments/w03/evaluate_retrieval.py`](../assignments/w03/evaluate_retrieval.py) calculates Recall@5 for the 20 cases in `data/evaluation/retrieval_gold.json`.
-- [`app/retrieval_api.py`](../app/retrieval_api.py) defines `POST /search`. [`app/mock_jira.py`](../app/mock_jira.py) mounts that router so retrieval and the existing mock Jira endpoints run from one FastAPI application and port.
+- [`app/retrieval_api.py`](../app/retrieval_api.py) defines `POST /search`, and [`app/main.py`](../app/main.py) mounts the router alongside meeting analysis. The mock Jira routes remain in [`app/mock_jira.py`](../app/mock_jira.py).
 - [`tests/test_vector_store.py`](../tests/test_vector_store.py) covers chunking, embedding stability, manifest loading, initialization, upsert/delete, and authorization-aware SQL ordering.
 
 **How to run:**
@@ -36,16 +36,16 @@ python assignments/w03/ingest_documents.py
 python assignments/w03/evaluate_retrieval.py
 ```
 
-Run the Jira and retrieval APIs together on port 8001:
+Run the main API, which includes the retrieval endpoint, on port 8000:
 
 ```bash
-uvicorn app.mock_jira:app --reload --port 8001
+uvicorn app.main:app --reload --port 8000
 ```
 
 Example project-scoped retrieval request:
 
 ```bash
-curl -X POST http://127.0.0.1:8001/search \
+curl -X POST http://127.0.0.1:8000/search \
   -H 'Content-Type: application/json' \
   -H 'X-Allowed-Project: ALPHA' \
   -d '{"query":"What is the Alpha UAT sign-off date?", "project_id":"ALPHA"}'

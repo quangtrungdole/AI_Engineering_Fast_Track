@@ -45,7 +45,28 @@ python scripts/openai_service_cli.py text "Explain the risk." --model gpt-5.6-lu
 The underlying helpers are in `app/services/openai_service.py` and support UTF-8 `.md`
 and `.txt` files.
 
-## Meeting analysis API
+## Set up the pgvector database
+
+Complete this setup before using the Search API. To start with a clean local
+training database, reset its Docker volume and start the database. This deletes
+any data stored in that local volume:
+
+```bash
+docker compose down -v
+docker compose up -d db
+```
+
+Initialize the schema and ingest the 15 fixture documents:
+
+```bash
+python assignments/w03/ingest_documents.py
+```
+
+## Main API
+
+The main API runs on port `8000` and contains APIs developed for the AI Engineering Fast Track assignments.
+
+### Meeting analysis API
 
 Set `OPENAI_API_KEY` in `.env` and start the application:
 
@@ -67,6 +88,27 @@ determined from the notes; resolved dates use `YYYY-MM-DD`. The API validates th
 request and returns an error response rather than malformed model output when
 analysis fails. Interactive API documentation is available at
 `http://127.0.0.1:8000/docs`.
+
+### Search API
+
+The search endpoint returns relevant evidence chunks from the requested project.
+
+#### Run the search API
+
+Start the main API as shown above after the database has been set up and ingested.
+
+Send a project-scoped request to `POST /search`:
+
+```bash
+curl -X POST http://127.0.0.1:8000/search \
+  -H 'Content-Type: application/json' \
+  -H 'X-Allowed-Project: ALPHA' \
+  -d '{"query":"What is the Alpha UAT sign-off date?", "project_id":"ALPHA"}'
+```
+
+The `X-Allowed-Project` header must match `project_id`; the API rejects requests
+for a different project. Results contain matching document chunks and their
+source metadata.
 
 ### Resource map
 - `data/documents/`: 15 synthetic documents plus manifest (5 requirements, 5 technical, 5 PM)
