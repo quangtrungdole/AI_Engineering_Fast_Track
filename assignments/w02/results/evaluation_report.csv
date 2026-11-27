@@ -1,0 +1,21 @@
+id,summary_similarity,summary_correct,decision_tp,decision_fp,decision_fn,decision_precision,decision_recall,decision_f1,action_tp,action_fp,action_fn,action_precision,action_recall,action_f1,owner_accuracy,due_date_accuracy,schema_valid,fully_passed,failure_reason
+TC01,0.6923320728266634,True,1,0,0,1.0,1.0,1.0,3,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC02,0.8174006426585911,True,1,0,0,1.0,1.0,1.0,3,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC03,0.7850327578422946,True,1,0,0,1.0,1.0,1.0,3,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC04,0.8642506629239709,True,1,0,0,1.0,1.0,1.0,3,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC05,0.8541590127439495,True,1,0,0,1.0,1.0,1.0,1,2,2,0.3333333333333333,0.3333333333333333,0.3333333333333333,1.0,1.0,True,False,action extraction mismatch
+TC06,0.7251500807615312,True,null,null,null,1.0,1.0,1.0,1,1,1,0.5,0.5,0.5,1.0,1.0,True,False,action extraction mismatch
+TC07,0.9178195747659477,True,1,0,0,1.0,1.0,1.0,1,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC08,0.8932771017468473,True,null,null,null,1.0,1.0,1.0,2,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC09,0.8560845978937062,True,1,0,0,1.0,1.0,1.0,null,null,null,1.0,1.0,1.0,1.0,1.0,True,True,
+TC10,0.8599456250522646,True,null,null,null,1.0,1.0,1.0,null,null,null,1.0,1.0,1.0,1.0,1.0,True,True,
+TC11,0.6536052216938849,True,null,null,null,1.0,1.0,1.0,null,null,null,1.0,1.0,1.0,1.0,1.0,True,True,
+TC12,0.8001701313119843,True,null,null,null,1.0,1.0,1.0,null,null,null,1.0,1.0,1.0,1.0,1.0,True,True,
+TC13,0.5877517073676283,False,null,null,null,1.0,1.0,1.0,1,0,0,1.0,1.0,1.0,1.0,1.0,True,False,summary similarity below threshold
+TC14,0.7695505794005457,True,2,0,0,1.0,1.0,1.0,4,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC15,0.7738673575244831,True,2,0,0,1.0,1.0,1.0,5,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC16,0.7892531960107451,True,1,0,0,1.0,1.0,1.0,3,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC17,0.7559133843019782,True,3,0,0,1.0,1.0,1.0,4,0,0,1.0,1.0,1.0,1.0,1.0,True,True,
+TC18,0.8674610240387943,True,null,null,null,1.0,1.0,1.0,null,null,null,1.0,1.0,1.0,1.0,1.0,True,True,
+TC19,0.8913049984148262,True,null,null,null,1.0,1.0,1.0,null,null,null,1.0,1.0,1.0,1.0,1.0,True,True,
+TC20,0.6651906459404446,True,null,null,null,1.0,1.0,1.0,null,null,null,1.0,1.0,1.0,1.0,1.0,True,True,
